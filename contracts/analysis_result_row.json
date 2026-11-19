@@ -1,0 +1,55 @@
+{
+  "analysis_run_id": "56b141db-b46b-43b1-97f1-e24c6386f5cc",
+  "screener_run_id": "47141ed8-aef5-42a1-a5c9-f6585600ee0d",
+  "ticker": "AAPL",
+  "as_of": "2026-10-09",
+  "captured_at": "2026-10-09T14:30:00+00:00",
+  "open": 255.0,
+  "high": 260.0,
+  "low": 252.0,
+  "close": 258.0,
+  "volume": 1234567.0,
+  "ema50": 250.0,
+  "ema100": 245.0,
+  "ema200": 230.0,
+  "rsi_14": 61.5,
+  "atr_14": 4.0,
+  "entry": 250.0,
+  "entry_support": "EMA50",
+  "stop": 246.0,
+  "target": 262.0,
+  "risk_per_share": 4.0,
+  "actionable": true,
+  "indicators": {
+    "EMA50": 250.0,
+    "EMA100": 245.0,
+    "EMA200": 230.0,
+    "RSI_14": 61.5,
+    "ATRr_14": 4.0
+  },
+  "signals": {
+    "rsi_bull": true,
+    "ema100_above_ema200": true
+  },
+  "plan": {
+    "setup": "long_pullback",
+    "actionable": true,
+    "entry_rule": "limit at support",
+    "entry": 250.0,
+    "entry_support": "EMA50",
+    "stop": 246.0,
+    "target": 262.0,
+    "risk_per_share": 4.0,
+    "rr_ratio": 3.0,
+    "strategies": {
+      "MAMA_daily": {
+        "status": "ENTRY_TRIGGERED",
+        "timeframe": "1d"
+      }
+    }
+  },
+  "screener_snapshot": {
+    "score": 6,
+    "rr_ratio": 3.0
+  }
+}
