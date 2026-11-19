@@ -1,6 +1,7 @@
 # Credentials and local configuration
 credentials.json
 token.json
+trading212.env
 *.env
 .env
 .env.*
@@ -12,6 +13,8 @@ screener/config.ini
 *.key
 *.p12
 *.pfx
+.direnv/
+.envrc
 
 # Python
 __pycache__/
@@ -21,6 +24,7 @@ __pycache__/
 .mypy_cache/
 .pytype/
 .ruff_cache/
+.hypothesis/
 .tox/
 .nox/
 .venv/
@@ -30,17 +34,27 @@ ENV/
 .coverage.*
 htmlcov/
 *.egg-info/
+.eggs/
+build/
+site/
 
 # Node / frontend build output
 node_modules/
 dist/
 .vite/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
 
 # Go build and test output
 *.exe
 *.test
 *.out
 coverage.out
+coverage.txt
 *.coverprofile
 
 # Generated local data and logs
@@ -57,5 +71,10 @@ screener/test_results.csv
 
 # Operating system and editor files
 .DS_Store
+Thumbs.db
+Desktop.ini
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
