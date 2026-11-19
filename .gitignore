@@ -1,0 +1,61 @@
+# Credentials and local configuration
+credentials.json
+token.json
+*.env
+.env
+.env.*
+!.env.example
+!.env.*.example
+screener/config.ini
+!screener/config.example.ini
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.pytype/
+.ruff_cache/
+.tox/
+.nox/
+.venv/
+venv/
+ENV/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+
+# Node / frontend build output
+node_modules/
+dist/
+.vite/
+
+# Go build and test output
+*.exe
+*.test
+*.out
+coverage.out
+*.coverprofile
+
+# Generated local data and logs
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.backup
+screener/green_stocks.csv
+screener/screener_results.csv
+screener/test_debug.csv
+screener/test_results.csv
+
+# Operating system and editor files
+.DS_Store
+.vscode/
+.idea/
