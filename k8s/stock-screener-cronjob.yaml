@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stock-screener-config
+data:
+  SCREENER_UNIVERSE: "nasdaq,dow,dax,ftse100,cac40,all-eu,sp500"
+  SCREENER_MAX_SYMBOLS: "1000"
+  SCREENER_START_DATE: "2020-01-01"
+  SCREENER_GREEN_ONLY: "false"
+  RR_RATIO: "3.0"
+  ANALYSIS_ENABLED: "true"
+  ANALYSIS_RSI_THRESHOLD: "55"
+  ANALYSIS_MACD_ZERO_TOLERANCE_PCT: "0.5"
+  ANALYSIS_FISHBALL_SUPPORT_LOOKBACK: "20"
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: stock-screener
+spec:
+  schedule: "30 18 * * 1-5"
+  timeZone: "America/New_York"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 3600
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 21600
+      template:
+        spec:
+          restartPolicy: Never
+          imagePullSecrets:
+            - name: stock-screener-registry
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: stock-screener
+              image: pikoters/stock_trading:latest
+              imagePullPolicy: Always
+              envFrom:
+                - configMapRef:
+                    name: stock-screener-config
+                - secretRef:
+                    name: stock-screener-db
+              resources:
+                requests:
+                  cpu: 500m
+                  memory: 1Gi
+                limits:
+                  cpu: "2"
+                  memory: 3Gi
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                    - ALL

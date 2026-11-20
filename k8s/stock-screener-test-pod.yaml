@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stock-screener-test
+spec:
+  restartPolicy: Never
+  imagePullSecrets:
+    - name: stock-screener-registry
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10001
+    runAsGroup: 10001
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: stock-screener
+      image: pikoters/stock_trading:latest
+      imagePullPolicy: Always
+      envFrom:
+        - configMapRef:
+            name: stock-screener-config
+        - secretRef:
+            name: stock-screener-db
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1Gi
+        limits:
+          cpu: "2"
+          memory: 3Gi
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL
